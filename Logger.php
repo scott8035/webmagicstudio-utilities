@@ -9,11 +9,11 @@
  *
  */
 
+declare(strict_types=1);
+
 namespace WebMagicStudio;
 
 use DateTime;
-
-defined( 'ABSPATH' ) || exit( "No." );
 
 class Logger
 {
@@ -28,7 +28,7 @@ class Logger
         static $id = '';
 
         if ( $onlyOnDebug && ! ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ) {
-            return null;
+            return '';
         }
 
         if ( $needTimestamp ) {
@@ -37,15 +37,13 @@ class Logger
             $ts = '';
         }
 
-        $pid = getmypid()  .  ' ';
-
         if ( $useID ) {
             if ( empty( $id ) ) {
                 $id = ( new DateTime() )->format( "i:s.u" )  .  ' ';
             }
         }
 
-        $output = "{$ts}{$pid}{$id}{$message}";
+        $output = "{$ts}{$id}{$message}";
 
         if ( ! $noOutput ) {
             error_log( $output );
