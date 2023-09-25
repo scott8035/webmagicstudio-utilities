@@ -5,6 +5,7 @@
  *
  * Changelog:
  *
+ * 0.0.6    2023-09-25  Add slugToTitleCase()
  * 0.0.5    2022-09-19  Fix aLittleBit() so it doesn't give appearance of adding a space before
  *                      and after the content of a tag (it was a translated newline)
  * 0.0.4    2022-07-28  Make aLittleBit() multi-byte character aware, enclose result in
@@ -96,5 +97,9 @@ class TextHelper {
         }
 
         return $chunk2;
+    }
+
+    public static function slugToTitleCase( string $slug ) : string {
+        return ucwords( str_replace( '-', ' ', $slug ) );
     }
 }
